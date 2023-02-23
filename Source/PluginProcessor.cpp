@@ -164,10 +164,11 @@ void DelayExampleAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
     delayToggleSmoother.setTargetValue(*delayToggle);
 
     // Delay Buffer
-    if (delayBuffer.getNumSamples() != numSamples)
+    if (delayBuffer.getNumSamples() != numSamples) {
         delayBuffer.setSize(totalNumInputChannels, numSamples);
         delayBuffer.clear();
-    
+    }
+  
     for (int channel = 0; channel < totalNumInputChannels; ++channel) {
         auto* channelData = buffer.getWritePointer(channel);
         delayBuffer.copyFrom(channel, 0, channelData, numSamples, 1);
